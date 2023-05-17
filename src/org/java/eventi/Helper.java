@@ -44,6 +44,7 @@ public class Helper {
 		int totalSpots = sc.nextInt();
 
 		System.out.println("Insert the " + typeOfEvent + " title");
+		sc.nextLine();
 		String eventTitle = sc.nextLine();
 		
 		Event eventTest;
