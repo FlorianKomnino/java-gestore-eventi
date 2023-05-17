@@ -6,66 +6,61 @@ import java.util.Scanner;
 
 public class Helper {
 	
-	public static LocalDate getDateFromUser() throws Exception {
-		Scanner dateSc = new Scanner(System.in);
-		System.out.println("Insert the date in the format yyyy-MM-dd");
-		dateSc.nextLine();
-		String dateString = dateSc.nextLine();
-		LocalDate date = LocalDate.parse(dateString, DateTimeFormatter.ISO_LOCAL_DATE);
-		dateSc.close();
-		if (date.isBefore(LocalDate.now())) {
-			throw new Exception("It's not possible to add an event in that date.");
-		} else {			
-			System.out.println("Ha funzionato");
-		}
-		return date;
-	}
-	
 	public static void newEventCreator() throws Exception {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Insert the number of total available spots of your event");
 		int totalSpots = sc.nextInt();
-
-		LocalDate eventDate = null;
 		
-		Scanner dateSc = new Scanner(System.in);
 		System.out.println("Insert the date in the format yyyy-MM-dd");
-		String dateString = dateSc.nextLine();
+		sc.nextLine();
+		String dateString = sc.nextLine();
 		LocalDate date = LocalDate.parse(dateString, DateTimeFormatter.ISO_LOCAL_DATE);
-		dateSc.close();
 		if (date.isBefore(LocalDate.now())) {
 			throw new Exception("It's not possible to add an event in that date.");
-		} else {			
-			System.out.println("Ha funzionato");
 		}
 		
 		System.out.println("Insert the event title");
-		sc.next();
 		String eventTitle = sc.nextLine();
-		sc.close();
 		
 		Event eventTest = new Event(eventTitle, date, totalSpots);
 		System.out.println(eventTest);
+
+		System.out.println("Do you want to add some reservations?");
+		System.out.println("1 - yes");
+		System.out.println("2 - no");
+		
+		int opChoice = sc.nextInt();
+		if (opChoice < 1 && opChoice > 2) {
+			System.out.println("Sorry, choice not found!");
+		} else if (opChoice == 1) {
+			System.out.println("How many reservations you want to add?");
+			int resNum = sc.nextInt();
+			eventTest.reservationsSetter(resNum);
+		} else if (opChoice == 2) {
+			System.out.println("Ok let's go on...");
+		}
+		
+		System.out.println("Do you want to remove some reservations?");
+		System.out.println("1 - yes");
+		System.out.println("2 - no");
+		
+		int removeChoice = sc.nextInt();
+		if (removeChoice < 1 && removeChoice > 2) {
+			System.out.println("Sorry, choice not found!");
+		} else if (removeChoice == 1) {
+			System.out.println("How many reservations you want to remove?");
+			int resNum = sc.nextInt();
+			eventTest.reservationsRemover(resNum);
+		} else if (removeChoice == 2) {
+			System.out.println("Ok we're done! :)");
+		}
+		
+		System.out.println("The number of reservations is: " + eventTest.getReservations());
+		System.out.println("The number of still available spots is: " + (eventTest.getTotalSpots() - eventTest.getReservations()));
 		
 	}
 	
-	public static void evSetterOptions() {
-		System.out.println("Do you wish to modify your event?");
-		System.out.println("1 - add reservations");
-		System.out.println("2 - remove reservations");
-		System.out.println("3 - change the title");
-		System.out.println("4 - change the date");
-		System.out.println("5 - exit from event setter");		
-	}
-	
-	public static Integer eventSetterChoice() {
-		Scanner sc = new Scanner(System.in);
-		Integer evSetChoice = sc.nextInt();
-		sc.close();
-		return evSetChoice;
-	}
-	
-	
+
 	
 	
 }

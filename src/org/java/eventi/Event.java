@@ -46,17 +46,33 @@ public class Event {
 	public void addReservation() {
 		if(totalSpots > reservations && myNow.isBefore(date)) {
 			reservations++;
-			System.out.println("Your reservation has been added succesfully!");
-		} else {
-			System.err.println("Sorry, something went wrong!");
 		}
 	}
 	public void removeReservation() {
 		if(reservations > 0 && myNow.isBefore(date)) {
 			reservations--;
-			System.out.println("Your reservation has been removed succesfully!");
+		}
+	}
+	
+	public void reservationsSetter(int resNum) {
+		if (resNum > 0 && resNum < getTotalSpots() - getReservations()) {
+			for (int i=0; i< resNum; i++) {
+				addReservation();
+			}
+			System.out.println("Reservations added succesfully!");
 		} else {
-			System.err.println("Sorry, something went wrong!");
+			System.out.println("It's impossible to add that number of reservations");
+		}
+	}
+	
+	public void reservationsRemover(int resNum) {
+		if (resNum > 0 && resNum < getReservations()) {
+			for (int i=0; i< resNum; i++) {
+				removeReservation();
+			}
+			System.out.println("Reservations removed succesfully!");
+		} else {
+			System.out.println("It's impossible to remove that number of reservations");
 		}
 	}
 	
