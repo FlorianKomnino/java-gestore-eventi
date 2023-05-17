@@ -8,42 +8,54 @@ public class Event {
 	private int totalSpots;
 	private int reservations;
 	
+	private LocalDate myNow = LocalDate.now();
+	
 	public Event(String title, LocalDate date, int totalSpots) {
 		setTitle(title);
 		setDate(date);
-		setTotalSpots(totalSpots);
-		setReservations(0);
+		this.totalSpots = totalSpots;
+		this.reservations = 0;
 	}
-
+	
 	public String getTitle() {
 		return title;
 	}
-
 	public void setTitle(String title) {
 		this.title = title;
 	}
-
 	public LocalDate getDate() {
 		return date;
 	}
-
 	public void setDate(LocalDate date) {
 		this.date = date;
 	}
-
 	public int getTotalSpots() {
 		return totalSpots;
 	}
-
-	public void setTotalSpots(int totalSpots) {
-		this.totalSpots = totalSpots;
-	}
-
 	public int getReservations() {
 		return reservations;
 	}
-
-	public void setReservations(int reservations) {
-		this.reservations = reservations;
+	
+	public void addReservation() {
+		if(totalSpots > reservations && myNow.isBefore(date)) {
+			reservations++;
+			System.out.println("Your reservation has been added succesfully!");
+		} else {
+			System.err.println("Sorry, something went wrong!");
+		}
+	}
+	public void removeReservation() {
+		if(reservations > 0 && myNow.isBefore(date)) {
+			reservations--;
+			System.out.println("Your reservation has been removed succesfully!");
+		} else {
+			System.err.println("Sorry, something went wrong!");
+		}
+	}
+	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "Event: " + date + " - " + title;
 	}
 }
