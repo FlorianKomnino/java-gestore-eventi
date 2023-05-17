@@ -1,6 +1,9 @@
 package org.java.eventi;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Scanner;
 
 public class Event {
 	private String title;
@@ -10,8 +13,12 @@ public class Event {
 	
 	private LocalDate myNow = LocalDate.now();
 	
-	public Event(String title, LocalDate date, int totalSpots) {
-		setTitle(title);
+	public Event(String title, LocalDate date, int totalSpots) throws Exception {
+		if (title != "") {
+			setTitle(title);
+		} else {
+			throw new Exception("The title cannot be empty");
+		}
 		setDate(date);
 		this.totalSpots = totalSpots;
 		this.reservations = 0;
