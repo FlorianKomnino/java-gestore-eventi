@@ -23,7 +23,7 @@ public class Helper {
 		LocalTime eventHourPars = null;
 		BigDecimal bigDecEventPrice = null;
 		if (typeOfEvent.toLowerCase().equals("concert")) {
-			System.out.println("Insert the price of you event");
+			System.out.println("Insert the price of your event");
 			float eventPrice = sc.nextFloat();
 			bigDecEventPrice = BigDecimal.valueOf(eventPrice);
 			System.out.println("Insert the hour of your event in \"HH:mm\" format: ");

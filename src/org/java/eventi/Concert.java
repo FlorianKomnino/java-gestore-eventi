@@ -1,9 +1,9 @@
 package org.java.eventi;
 
 import java.math.BigDecimal;
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
 public class Concert extends Event {
 	private LocalTime Hour;
@@ -23,8 +23,8 @@ public class Concert extends Event {
 		Hour = hour;
 	}
 
-	public BigDecimal getPrice() {
-		return price;
+	public String getPrice() {
+		return NumberFormat.getCurrencyInstance().format(price);
 	}
 
 	public void setPrice(BigDecimal price) {
@@ -34,6 +34,6 @@ public class Concert extends Event {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return "Concert: " + getDate() + " / " + Hour + " - " + getTitle() + " - " + price + "€";
+		return "Concert: " + getDate() + " / " + Hour + " - " + getTitle() + " - " + getPrice();
 	}
 }
